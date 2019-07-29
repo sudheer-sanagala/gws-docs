@@ -1,0 +1,58 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: GWS
+  description: |-
+    # Introduction
+    What does your API do?
+    ProductAvailability 
+    Product Catalog
+
+    # Overview
+    Things that the developers should know about
+
+    # Authentication
+    What is the preferred way of using the API?
+    Basic Authentication
+
+    # Error Codes
+    What errors and status codes can a user expect?
+
+    # Rate limit
+    Is there a limit to the number of requests an user can send?
+  contact: {}
+host: ws-dev.specialized.com
+basePath: /soa-infra/resources/GWS
+securityDefinitions:
+  auth:
+    type: basic
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+paths:
+  /searchserial/product/v1/WSBC601079664N:
+    get:
+      description: This is an OSB service
+      summary: serial number search
+      tags:
+        - product
+      operationId: WSBC614119599N
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - auth: []
