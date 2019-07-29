@@ -21,7 +21,7 @@ info:
     # Rate limit
     Is there a limit to the number of requests an user can send?
   contact: {}
-host: ws.specialized.com
+host: ws-dev.specialized.com
 basePath: /soa-infra/resources/GWS
 securityDefinitions:
   auth:
