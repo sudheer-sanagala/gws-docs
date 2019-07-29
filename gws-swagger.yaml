@@ -21,7 +21,7 @@ info:
     # Rate limit
     Is there a limit to the number of requests an user can send?
   contact: {}
-host: ws-dev.specialized.com
+host: ws.specialized.com
 basePath: /soa-infra/resources/GWS
 securityDefinitions:
   auth:
@@ -36,7 +36,7 @@ produces:
 paths:
   /searchserial/product/v1/WSBC601079664N:
     get:
-      description: This is an OSB service
+      description: This is an Serial Number webservice
       summary: serial number search
       tags:
         - product
