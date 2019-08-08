@@ -55,9 +55,11 @@
           layout: 'StandaloneLayout',
 
           requestInterceptor: function(request) {
-            this.url = proxyUrl + '/' + this.url; // will change the URL used.
-
+            if (!this.url.includes('.yaml')) {
+              this.url = proxyUrl + '/' + this.url; // will change the URL used.
+            }
             console.log(request);
+            console.log(this.url);
             return this;
           }
         });
