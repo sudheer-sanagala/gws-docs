@@ -62,6 +62,7 @@
             //console.log(this.url);
             return this;
           },
+          showMutatedRequest: false,
           responseInterceptor: function(response) {
             if (!response.url.includes('.yaml')) {
               response.url.replace(proxyUrl, '');
