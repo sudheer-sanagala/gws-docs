@@ -64,10 +64,10 @@
           },
           responseInterceptor: function(request) {
             //if (!this.url.includes('.yaml')) {
-            //  this.url = proxyUrl + '/' + this.url; // will change the URL used.
+            this.url.replace(proxyUrl, '');
             //}
             console.log(request);
-            //return this;
+            return this;
           }
         });
         // End Swagger UI call region
