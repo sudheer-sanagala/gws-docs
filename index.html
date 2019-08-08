@@ -58,15 +58,16 @@
             if (!this.url.includes('.yaml')) {
               this.url = proxyUrl + '/' + this.url; // will change the URL used.
             }
-            console.log(request);
-            console.log(this.url);
+            //console.log(request);
+            //console.log(this.url);
             return this;
           },
+
           responseInterceptor: function(request) {
-            if (!this.url.includes('.yaml')) {
-              this.url.replace(proxyUrl, '');
-            }
-            //console.log(request);
+            //if (!this.url.includes('.yaml')) {
+            //this.url.replace(proxyUrl, '');
+            //}
+            console.log(request);
             return this;
           }
         });
