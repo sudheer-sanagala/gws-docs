@@ -56,7 +56,8 @@
 
           requestInterceptor: function() {
             this.url = proxyUrl + '/' + this.url; // will change the URL used.
-            return this;
+            //  return this;
+            console.log(this);
           }
         });
         // End Swagger UI call region
