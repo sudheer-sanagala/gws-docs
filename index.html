@@ -47,7 +47,7 @@
       window.onload = function() {
         // Begin Swagger UI call region
         const ui = SwaggerUIBundle({
-          url: 'https://sudheer-sanagala.github.io/gws-docs/gws-swagger.yaml',
+          url: 'gws-swagger.yaml',
           dom_id: '#swagger-ui',
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
@@ -61,6 +61,13 @@
             console.log(request);
             console.log(this.url);
             return this;
+          },
+          responseInterceptor: function(request) {
+            //if (!this.url.includes('.yaml')) {
+            //  this.url = proxyUrl + '/' + this.url; // will change the URL used.
+            //}
+            console.log(request);
+            //return this;
           }
         });
         // End Swagger UI call region
