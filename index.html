@@ -61,8 +61,14 @@
             //console.log(request);
             //console.log(this.url);
             return this;
+          },
+          responseInterceptor: function(response) {
+            if (!response.url.includes('.yaml')) {
+              response.url.replace(proxyUrl, '');
+            }
+            console.log(response);
+            return response;
           }
-
           /*  
           responseInterceptor: function(request) {
             //if (!this.url.includes('.yaml')) {
