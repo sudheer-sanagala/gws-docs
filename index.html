@@ -43,6 +43,7 @@
     <script src="dist/swagger-ui-bundle.js"></script>
     <script src="dist/swagger-ui-standalone-preset.js"></script>
     <script>
+      let proxyUrl = 'http://crossorigin.me';
       window.onload = function() {
         // Begin Swagger UI call region
         const ui = SwaggerUIBundle({
@@ -51,7 +52,12 @@
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
           plugins: [SwaggerUIBundle.plugins.DownloadUrl],
-          layout: 'StandaloneLayout'
+          layout: 'StandaloneLayout',
+
+          requestInterceptor: function() {
+            this.url = proxyUrl + '/' + this.url; // will change the URL used.
+            return this;
+          }
         });
         // End Swagger UI call region
 
