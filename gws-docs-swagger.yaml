@@ -1,0 +1,538 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: GWS
+  description: |-
+    # Introduction
+    What does your API do?
+
+    # Overview
+    Things that the developers should know about
+
+    # Authentication
+    What is the preferred way of using the API?
+    Basic Authentication
+
+    # Error Codes
+    What errors and status codes can a user expect?
+
+    # Rate limit
+    Is there a limit to the number of requests an user can send?
+  contact: {}
+host: ws-dev.specialized.com
+basePath: /soa-infra/resources/GWS
+securityDefinitions:
+  auth:
+    type: basic
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+paths:
+  /searchserial/product/v1/{sno}:
+    get:
+      summary: serial number details
+      tags:
+        - product
+      operationId: SerialNumberGet
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: "sno"
+          in: "path"
+          description: "Serial Number"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - auth: []
+  /Product/catalog:
+    get:
+      summary: product catalog details
+      tags:
+        - product
+      operationId: ProductCatalogGet
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: Username
+          in: query
+          required: true
+          type: string
+          description: ''
+        - name: Country
+          in: query
+          required: true
+          type: string
+          description: ''
+        - name: SourceApp
+          in: query
+          required: true
+          type: string
+          description: ''
+        - name: IncludePrice
+          in: query
+          required: true
+          type: string
+          description: ''
+        - name: ResultFormat
+          in: query
+          required: true
+          type: string
+          description: ''          
+        - name: PageIndex
+          in: query
+          required: true
+          type: integer
+          format: int32
+          description: ''
+        - name: Sku
+          in: query
+          required: false
+          type: string
+          description: ''
+        - name: Lang
+          in: query
+          required: false
+          type: string
+          description: ''
+        - name: ItemsPerPage
+          in: query
+          required: false
+          type: integer
+          format: int32
+          description: ''
+        - name: AccountNum
+          in: query
+          required: false
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          headers: {}
+        '422':
+          description: 'One or more parameters are invalid'
+          headers: {}          
+      security:
+        - auth: []
+  /ProductAvailability/Availability:
+    post:
+      summary: stock availability
+      tags:
+        - product
+      operationId: StockAvailabilityPost
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/stockavailabilityRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+        '404':
+          description: 'One or more item are unavailable'
+          headers: {}          
+      security:
+        - auth: []
+  /processorder/api/v1/order:
+    post:
+      description: 'TODO: Add Description'
+      summary: order creation with multiple sku
+      tags:
+        - order
+      operationId: ProcessorderApiV1OrderPost
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - auth: []
+  /OrderDetails/Rest/api/v1:
+    post:
+      description: 'TODO: Add Description'
+      summary: order details
+      tags:
+        - order
+      operationId: OrderDetailsRestApiV1Post
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/orderdetailsRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - auth: []
+  /processorder/api/v1/order/RND249328:
+    put:
+      description: 'TODO: Add Description'
+      summary: update order
+      tags:
+        - order
+      operationId: ProcessorderApiV1OrderRND249328Put
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/updateorderRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - auth: []
+  /SearchTransactions/Rest/api/v1:
+    post:
+      description: 'TODO: Add Description'
+      summary: transactions - orders
+      tags:
+        - order
+      operationId: SearchTransactionsRestApiV1Post
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/transactions-ordersRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      security:
+        - auth: []
+definitions:
+  CredentialRequest:
+    title: CredentialRequest
+    type: object
+    properties:
+      Username:
+        type: string
+      Password:
+        type: string
+      AccountNumber:
+        type: string
+      Lang:
+        type: string
+      Country:
+        type: string
+      SourceApp:
+        type: string
+    required:
+      - Username
+      - Password
+      - AccountNumber
+      - Lang
+      - Country
+      - SourceApp
+  OrderLine:
+    title: OrderLine
+    type: object
+    properties:
+      ExtOrderLineRef:
+        example: GWS406
+        type: string
+      SellersItemIdentification:
+        $ref: '#/definitions/SellersItemIdentification'
+      Quantity:
+        example: '1'
+        type: string
+      PreferredDeliveryDate:
+        type: string
+      TransactionType:
+        example: UPDATE
+        type: string
+    required:
+      - ExtOrderLineRef
+      - SellersItemIdentification
+      - Quantity
+      - PreferredDeliveryDate
+      - TransactionType
+  OrderRequest:
+    title: OrderRequest
+    type: object
+    properties:
+      ExtOrderRef:
+        type: string
+      TransactionType:
+        type: string
+      OrderLine:
+        type: array
+        items:
+          $ref: '#/definitions/OrderLine'
+    required:
+      - ExtOrderRef
+      - TransactionType
+      - OrderLine
+  updateorderRequest:
+    title: updateorderRequest
+    example:
+      CredentialRequest:
+        Username: HEFEI001@429415
+        Password: 'null'
+        AccountNumber: 429415
+        Lang: zhs
+        Country: CN
+        SourceApp: POS
+      OrderRequest:
+        ExtOrderRef: RND249328
+        TransactionType: UPDATE
+        OrderLine:
+          - ExtOrderLineRef: GWS406
+            SellersItemIdentification:
+              ItemNumber: 43015-0120
+            Quantity: '1'
+            PreferredDeliveryDate: 'null'
+            TransactionType: UPDATE
+    type: object
+    properties:
+      CredentialRequest:
+        $ref: '#/definitions/CredentialRequest1'
+      OrderRequest:
+        $ref: '#/definitions/OrderRequest'
+    required:
+      - CredentialRequest
+      - OrderRequest
+  ItemIdentification:
+    title: ItemIdentification
+    type: object
+    properties:
+      ItemNumber:
+        example: 2115-1030
+        type: string
+      ItemType:
+        example: SKU
+        type: string
+      RequestQuantity:
+        example: 1
+        type: integer
+        format: int32
+    required:
+      - ItemNumber
+      - ItemType
+      - RequestQuantity
+  stockavailabilityRequest:
+    title: stockavailabilityRequest
+    example:
+      CredentialRequest:
+        Username: '{{USERNAME}}'
+        Password: 'null'
+        AccountNumber: '{{ACC_NUM}}'
+        Lang: '{{LANG}}'
+        Country: '{{CNTRY}}'
+        SourceApp: POS
+      IncludePrice: 'Y'
+      ShipTo: 'null'
+      ItemIdentification:
+        - ItemNumber: 2115-1030
+          ItemType: SKU
+          RequestQuantity: 1
+        - ItemNumber: 25516-1811
+          ItemType: SKU
+          RequestQuantity: 1
+        - ItemNumber: 60516-1202
+          ItemType: SKU
+          RequestQuantity: 1
+    type: object
+    properties:
+      CredentialRequest:
+        $ref: '#/definitions/CredentialRequest'
+      IncludePrice:
+        type: string
+      ShipTo:
+        type: string
+      ItemIdentification:
+        type: array
+        items:
+          $ref: '#/definitions/ItemIdentification'
+    required:
+      - CredentialRequest
+      - IncludePrice
+      - ShipTo
+      - ItemIdentification
+  SellersItemIdentification:
+    title: SellersItemIdentification
+    example:
+      ItemNumber: 43015-0120
+    type: object
+    properties:
+      ItemNumber:
+        example: 43015-0120
+        type: string
+    required:
+      - ItemNumber
+  orderdetailsRequest:
+    title: orderdetailsRequest
+    example:
+      CredentialRequest:
+        Username: HEFEI001@429415
+        Password: 'null'
+        AccountNumber: 429415
+        Lang: zhs
+        Country: CN
+        SourceApp: POS
+      OrderNumber: 501943
+      CustPoNumber: 'null'
+      PageIndex: 0
+      OrdersPerPage: 2
+    type: object
+    properties:
+      CredentialRequest:
+        $ref: '#/definitions/CredentialRequest1'
+      OrderNumber:
+        type: integer
+        format: int32
+      CustPoNumber:
+        type: string
+      PageIndex:
+        type: integer
+        format: int32
+      OrdersPerPage:
+        type: integer
+        format: int32
+    required:
+      - CredentialRequest
+      - OrderNumber
+      - CustPoNumber
+      - PageIndex
+      - OrdersPerPage
+  CredentialRequest1:
+    title: CredentialRequest1
+    type: object
+    properties:
+      Username:
+        type: string
+      Password:
+        type: string
+      AccountNumber:
+        type: integer
+        format: int32
+      Lang:
+        type: string
+      Country:
+        type: string
+      SourceApp:
+        type: string
+    required:
+      - Username
+      - Password
+      - AccountNumber
+      - Lang
+      - Country
+      - SourceApp
+  transactions-ordersRequest:
+    title: transactions-ordersRequest
+    example:
+      CredentialRequest:
+        Username: HEFEI001@429415
+        AccountNumber: '429415'
+        Lang: zhs
+        Country: CN
+        SourceApp: POS
+      StartDate: '2018-06-01'
+      EndDate: '2018-06-30'
+      Status: ALL
+      ItemGroup: ALL
+      TransactionType: PURCHASE ORDER
+      ShipAddress: null
+    type: object
+    properties:
+      CredentialRequest:
+        $ref: '#/definitions/CredentialRequest'
+      StartDate:
+        type: string
+      EndDate:
+        type: string
+      Status:
+        type: string
+      ItemGroup:
+        type: string
+      TransactionType:
+        type: string
+      ShipAddress:
+        type: string
+    required:
+      - CredentialRequest
+      - StartDate
+      - EndDate
+      - Status
+      - ItemGroup
+      - TransactionType
+      - ShipAddress
+tags: []

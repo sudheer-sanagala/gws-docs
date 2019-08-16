@@ -47,7 +47,7 @@
       window.onload = function() {
         // Begin Swagger UI call region
         const ui = SwaggerUIBundle({
-          url: 'gws-swagger.yaml',
+          url: 'gws-docs-swagger.yaml',
           dom_id: '#swagger-ui',
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
@@ -58,8 +58,6 @@
             if (!this.url.includes('.yaml')) {
               this.url = proxyUrl + '/' + this.url; // will change the URL used.
             }
-            //console.log(request);
-            //console.log(this.url);
             return this;
           },
           showMutatedRequest: false,
@@ -70,15 +68,6 @@
             console.log(response);
             return response;
           }
-          /*  
-          responseInterceptor: function(request) {
-            //if (!this.url.includes('.yaml')) {
-            //this.url.replace(proxyUrl, '');
-            //}
-            console.log(request);
-            return this;
-          }
-          */
         });
         // End Swagger UI call region
 
